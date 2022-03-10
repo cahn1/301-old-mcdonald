@@ -11,7 +11,10 @@ list_of_columns =['code', 'state', 'category', 'total exports', 'beef', 'pork', 
        'dairy', 'fruits fresh', 'fruits proc', 'total fruits', 'veggies fresh',
        'veggies proc', 'total veggies', 'corn', 'wheat', 'cotton']
 
-mycolumn='corn'
+selected = dcc.Dropdown(options=[{'label': item, 'value': item} for item in
+                               list_of_columns[3:]])
+#mycolumn='corn'
+mycolumn = selected
 myheading1 = f"Wow! That's a lot of {mycolumn}!"
 mygraphtitle = '2011 US Agriculture Exports by State'
 mycolorscale = 'ylorrd' # Note: The error message will list possible color scales.
@@ -51,8 +54,7 @@ app.title=tabtitle
 
 app.layout = html.Div(children=[
     html.H1(myheading1),
-    dcc.Dropdown(options=[{'label': item, 'value': item} for item in
-                          list_of_columns[3:]]),
+    selected,
     dcc.Graph(
         id='figure-1',
         figure=fig
