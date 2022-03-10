@@ -11,7 +11,7 @@ list_of_columns =['code', 'state', 'category', 'total exports', 'beef', 'pork', 
        'dairy', 'fruits fresh', 'fruits proc', 'total fruits', 'veggies fresh',
        'veggies proc', 'total veggies', 'corn', 'wheat', 'cotton']
 
-selected = dash.dependencies.Input('export_selected', 'value')
+selected = dash.dependencies.Input('selected_item', 'value')
 #mycolumn='corn'
 mycolumn = selected
 myheading1 = f"Wow! That's a lot of {mycolumn}!"
@@ -54,7 +54,7 @@ app.title=tabtitle
 app.layout = html.Div(children=[
     html.H1(myheading1),
     dcc.Dropdown(
-        id='export_selected',
+        id='selected_item',
         options=[list_of_columns[3:]],
         placeholder='Select a export item for analysis:',
         style={'width': '80%', 'padding': '3px', 'font-size': '20px',
@@ -69,6 +69,17 @@ app.layout = html.Div(children=[
     ]
 )
 
+# Connecting the Dropdown values to the graph
+@app.callback(
+    dash.dependencies.Output('figure-1', 'figure'),
+    [dash.dependencies.Input('selected_item', 'value')])
+fig.update_layout(
+    title_text = mygraphtitle,
+    geo_scope='usa',
+    width=1200,
+    height=800
+)
+
 ############ Deploy
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True)
