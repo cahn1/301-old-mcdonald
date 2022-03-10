@@ -11,8 +11,7 @@ list_of_columns =['code', 'state', 'category', 'total exports', 'beef', 'pork', 
        'dairy', 'fruits fresh', 'fruits proc', 'total fruits', 'veggies fresh',
        'veggies proc', 'total veggies', 'corn', 'wheat', 'cotton']
 
-selected = dcc.Dropdown(options=[{'label': item, 'value': item} for item in
-                               list_of_columns[3:]])
+selected = dash.dependencies.Input('export_selected', 'value')
 #mycolumn='corn'
 mycolumn = selected
 myheading1 = f"Wow! That's a lot of {mycolumn}!"
@@ -54,7 +53,12 @@ app.title=tabtitle
 
 app.layout = html.Div(children=[
     html.H1(myheading1),
-    selected,
+    dcc.Dropdown(
+        id='export_selected',
+        options=[list_of_columns[3:]],
+        placeholder='Select a export item for analysis:',
+        style={'width': '80%', 'padding': '3px', 'font-size': '20px',
+               'text-align-last': 'left'}),
     dcc.Graph(
         id='figure-1',
         figure=fig
