@@ -44,11 +44,11 @@ app.layout = html.Div(
                         'font-size': '20px',
                         'text-align-last': 'left'},
                     value=list_of_columns[3],)], className='two columns'),],),
-            html.Div([
-                dcc.Graph(
-                    id='figure-1',
-                    # figure=update_figure()
-                ),], className='ten columns'),
+        html.Div([
+            dcc.Graph(
+                id='figure-1',
+                # figure=update_figure()
+            ),], className='ten columns'),
         html.A('Code on Github', href=githublink),
         html.Br(),
         html.A("Data Source", href=sourceurl),])
